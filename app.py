@@ -427,8 +427,8 @@ def cekpotensikangker():
     return render_template("cekpotensikangker.html", questions=questions, prediction=prediction)
 
 
-if __name__ == '__main__':
-    app.run(debug=False)
+#if __name__ == '__main__':
+    #app.run(debug=False)
 
 import os
 port = int(os.environ.get("PORT", 5000))
