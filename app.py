@@ -180,9 +180,9 @@ def dashboard():
     return render_template('dashboard.html', username=session['username'])
 @app.route('/about')
 def about():
-    if 'username' not in session:
-        flash('Please log in first.', 'warning')
-        return redirect(url_for('login'))
+    #if 'username' not in session:
+        #flash('Please log in first.', 'warning')
+        #return redirect(url_for('login'))
     return render_template('about.html', username=session['username'])
 
 
