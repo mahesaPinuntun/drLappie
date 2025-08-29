@@ -145,7 +145,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        ua = request.headers.get('User-Agent', '').lower()
+        
     # server-side check for Android
        
         username = request.form['username']
@@ -164,6 +164,7 @@ def login():
             flash('Login successful.', 'success')
             return redirect(url_for('dashboard'))
         flash('Invalid credentials.', 'danger')
+    ua = request.headers.get('User-Agent', '').lower()
     if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
         # redirect to the special android login route
         return render_template('smartphonelogin.html')
