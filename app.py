@@ -146,9 +146,10 @@ def register():
 def login():
     ua = request.headers.get('User-Agent', '').lower()
     # server-side check for Android
-    if 'android' in ua:
+    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
         # redirect to the special android login route
-        return render_template('androidlogin.html')
+        return render_template('smartphonelogin.html')
+    
     if request.method == 'POST':
         username = request.form['username']
         pw = request.form['pw']
