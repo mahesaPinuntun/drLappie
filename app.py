@@ -138,8 +138,12 @@ def register():
         finally:
             cur.close()
             conn.close()
-
-    return render_template('register.html')
+    ua = request.headers.get('User-Agent', '').lower()
+    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+        # redirect to the special android login route
+        return render_template('smartphoneregister.html')
+    
+    return render_template('login.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
