@@ -198,11 +198,19 @@
             </div>
             <input type="submit" value="Register">
             <div class="input-box button">
-                
+
                 <button class="input-box button" type="submit" value="Register">Daftarkan Akun</button>
             </div>
         </form>
         <br>
+        <div>
+            <p>
+                belum punya akun?
+                <br>
+                <a href="{{url_for('register')}}">Daftar Akun disini</a>
+            </p>
+        </div>
+
         <hr>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
