@@ -194,6 +194,8 @@
                 <button class="input-box button" type="submit">Login</button>
             </div>
         </form>
+        <a href="{{url_for('register')}}" type=""></a>
+        <hr>
         {% with messages = get_flashed_messages(with_categories=true) %}
 		{% if messages %}
 			<ul class="flashes">
