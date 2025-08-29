@@ -144,13 +144,10 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    ua = request.headers.get('User-Agent', '').lower()
-    # server-side check for Android
-    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
-        # redirect to the special android login route
-        return render_template('smartphonelogin.html')
-    
     if request.method == 'POST':
+        ua = request.headers.get('User-Agent', '').lower()
+    # server-side check for Android
+       
         username = request.form['username']
         pw = request.form['pw']
 
@@ -167,7 +164,10 @@ def login():
             flash('Login successful.', 'success')
             return redirect(url_for('dashboard'))
         flash('Invalid credentials.', 'danger')
-
+    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+        # redirect to the special android login route
+        return render_template('smartphonelogin.html')
+    
     return render_template('login.html')
 
 
