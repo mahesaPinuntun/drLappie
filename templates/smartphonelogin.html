@@ -189,14 +189,17 @@
             <br>
             <br>
 
-            <div class="input-box button">
+            <div>
                 
                 <button class="input-box button" type="submit">Login</button>
             </div>
-            
-            <p>
+            <div>
+                <p>
                 belum punya akun? <a href="{{url_for('register')}}">Daftar Akun disini</a>
-            </p>
+                </p>
+            </div>
+
+            
         </form>
         <hr>
         {% with messages = get_flashed_messages(with_categories=true) %}
