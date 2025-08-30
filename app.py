@@ -117,6 +117,7 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    
     if request.method == 'POST':
         username = request.form['username']
         pw = request.form['pw']
@@ -126,6 +127,9 @@ def register():
         isadmin = int(request.form['isadmin'])
         conn = get_mysql_connection()
         cur = conn.cursor()
+        if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+        # redirect to the special android login route
+            return render_template('smartphoneregister.html')
         try:
             cur.execute(
                 "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
