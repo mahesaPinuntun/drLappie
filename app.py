@@ -141,7 +141,10 @@ def register():
                 (username, hashed, name, email, isadmin))
             conn.commit()
             flash('Registration successful. Please log in.', 'success')
-            return redirect(url_for('login'))
+            if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+                return render_template('smartphonelogin.html')
+            else:
+                return redirect(url_for('login'))
         except Exception as e:
             flash(f'Registration failed: {e}', 'danger')
         finally:
