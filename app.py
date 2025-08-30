@@ -118,6 +118,8 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     
+    ua = request.headers.get('User-Agent', '').lower()
+    disp = ''
     if request.method == 'POST':
         username = request.form['username']
         pw = request.form['pw']
@@ -128,8 +130,11 @@ def register():
         conn = get_mysql_connection()
         cur = conn.cursor()
         if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+            disp = 'smartphoneregister.html'
         # redirect to the special android login route
             return render_template('smartphoneregister.html')
+        else:
+            disp = 'login.html'
         try:
             cur.execute(
                 "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
@@ -142,12 +147,19 @@ def register():
         finally:
             cur.close()
             conn.close()
-        ua = request.headers.get('User-Agent', '').lower()
         if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+            disp = 'smartphoneregister.html'
+        else:
+            disp = 'login.hmtl'
         # redirect to the special android login route
             return render_template('smartphoneregister.html')
+    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+        # redirect to the special android login route
+            return render_template('smartphoneregister.html')
+    else:
+        disp = 'login.html'
     
-    return render_template('login.html')
+    return render_template(disp)
 
 
 @app.route('/login', methods=['GET', 'POST'])
