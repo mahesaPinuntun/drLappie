@@ -129,10 +129,19 @@ def register():
         isadmin = int(request.form['isadmin'])
         conn = get_mysql_connection()
         cur = conn.cursor()
+        try:
+            cur.execute(
+            "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
+            (username, hashed, name, email, isadmin))
+            conn.commit()
+            flash('Registration successful. Please log in.', 'success')
+        except Exception as e:
+            flash(f'Registration failed: {e}', 'danger')
         if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
             disp = 'smartphoneregister.html'
         # redirect to the special android login route
             return render_template('smartphoneregister.html')
+        
         else:
             disp = 'login.html'
         try:
@@ -152,6 +161,14 @@ def register():
             conn.close()
         if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
             disp = 'smartphoneregister.html'
+            try:
+                cur.execute(
+                "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
+                (username, hashed, name, email, isadmin))
+                conn.commit()
+                flash('Registration successful. Please log in.', 'success')
+            except Exception as e:
+                flash(f'Registration failed: {e}', 'danger')
         else:
             disp = 'login.hmtl'
         # redirect to the special android login route
